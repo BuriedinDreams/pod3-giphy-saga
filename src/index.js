@@ -10,25 +10,54 @@ import axios from 'axios';
 
 const sagaMiddleware = createSagaMiddleware();
 
+/* ---- SAGAS ---- */
+
 function* rootSaga() {
   // Dispatch/put listeners
-  yield takeEvery('FETCH_SEARCH', fetchSearch)
-}
+  yield takeEvery('SEND_SEARCH', sendSearch);
+} // end rootSaga
 
-function* fetchSearch (action) {
-  console.log('fetchSearch', action.payload);
-} // end fetchSearch
+function* sendSearch (action) {
+  // send search request to /api/search/{query}
+  let response = yield axios.get(`/api/search/${action.payload}`); // payload = phrase/word that the user searched
+  //console.log(response);
+
+  try {
+    yield put({
+      type: 'SET_SEARCH',
+      payload: response.data
+    })
+  } catch (err) {
+    console.log('Error in search', err);
+  }
+} // end sendSearch
+
+/* ---- REDUCERS ---- */
+
+const searchReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_SEARCH':
+      return action.payload; 
+    default:
+      return state;
+  }
+}
 
 // Redux store
 const storeInstance = createStore(
-  combineReducers({  }),
+  combineReducers({ 
+    searchReducer 
+    
+  }),
   applyMiddleware(sagaMiddleware, logger),
 );
 
+
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}>
-  <App /> 
+ReactDOM.render(
+  <Provider store={storeInstance}>
+    <App /> 
   </Provider>,
   document.getElementById('root'));
 

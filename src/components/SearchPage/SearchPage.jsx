@@ -11,19 +11,19 @@ function SearchPage() {
   const [ newSearch, setNewSearch ] = useState('');
 
   function handleSubmit() {
-    console.log('Im clicked', newSearch);
+    //console.log('Im clicked', newSearch);
     
     dispatch({
-      type: 'FETCH_SEARCH',
+      type: 'SEND_SEARCH',
       payload: newSearch // This is the phrase/word that the user searched
     })
 
-  }
+  } // end handleSubmit
 
   return (
   <div>
     <input 
-      type="text" 
+      type="text"
       value={newSearch}
       onChange={(evt) => setNewSearch(evt.target.value)}
     ></input>
