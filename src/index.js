@@ -12,8 +12,12 @@ const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
   // Dispatch/put listeners
-  yield takeEvery('FETCH_PLANTS', fetchPlants)
+  yield takeEvery('FETCH_SEARCH', fetchSearch)
 }
+
+function* fetchSearch (action) {
+  console.log('fetchSearch', action.payload);
+} // end fetchSearch
 
 // Redux store
 const storeInstance = createStore(
@@ -24,7 +28,7 @@ const storeInstance = createStore(
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(<Provider store={storeInstance}>
-  <App />
+  <App /> 
   </Provider>,
   document.getElementById('root'));
 
