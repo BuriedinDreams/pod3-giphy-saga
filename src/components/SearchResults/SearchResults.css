@@ -1,0 +1,22 @@
+.gifblock {
+  position: relative;
+  margin: 5px;
+  max-width: 350px;
+  height: auto;
+}
+
+.likebtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+#gifcontainer {
+  margin: 20px auto;
+  margin-top: 80px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 75%;
+}

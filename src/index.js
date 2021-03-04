@@ -10,13 +10,13 @@ import axios from 'axios';
 
 const sagaMiddleware = createSagaMiddleware();
 
-/* ---- SAGAS ---- */
+/* ---- SAGAS ---- */  // Sagas are used to store information to be sent to the server.
 
 function* rootSaga() {
   // Dispatch/put listeners
   yield takeEvery('SEND_SEARCH', sendSearch);
   yield takeEvery('FETCH_FAVORITES', fetchFavorites);
-
+  yield takeEvery('ADD_FAVORITE', addFavorite);
 } // end rootSaga
 
 function* sendSearch (action) {
@@ -27,18 +27,35 @@ function* sendSearch (action) {
   try {
     yield put({
       type: 'SET_SEARCH',
-      payload: response.data
+      payload: response.data // this response is used so the useSelector is able to retrieve the information
     })
   } catch (err) {
     console.log('Error in search', err);
   }
 } // end sendSearch
 
+function* addFavorite(action) { 
+  console.log('in addFavorite', action.payload)
+  
+  // post favorite to database
+  try {
+    yield axios.post(`/api/favorite/`, action.payload ); // this is the url from the user clicking the fav button.
+
+     // update favoriteReducer
+    yield put({ // put is dispatching the information to be grabbed by whoever.
+      type: 'FETCH_FAVORITES'  // this is being caught by RootSaga which is then being sent to function fetchFavorites()
+    });
+  } catch(err) {
+    console.log('Error in Fav post', err);
+  }
+
+}; // end addFavorite
+
 function* fetchFavorites() {
   try{
     let response = yield axios.get('/api/favorite');
     yield put({
-      type: 'SET_FAVORITES',
+      type: 'SET_FAVORITES', 
       payload: response.data
     });
   } 
