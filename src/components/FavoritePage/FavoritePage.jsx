@@ -1,5 +1,14 @@
+ç
+import FavoriteList from '../FavoriteList/FavoriteList';
+
+
 function FavoritePage() {
-  return <div>Fav Page</div>;
+  return (
+    <div>
+      <h2>Favorite Page</h2>
+      <FavoriteList />
+    </div>
+  )
 }
 
 export default FavoritePage;

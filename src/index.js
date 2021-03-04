@@ -12,19 +12,44 @@ const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
   // Dispatch/put listeners
-  yield takeEvery('FETCH_PLANTS', fetchPlants)
+  yield takeEvery('FETCH_FAVORITES', fetchFavorites)
+  // this will be for the PUT
+  yield takeEvery('', )
+}
+
+function* fetchFavorites() {
+  try{
+    let response = yield axios.get('/api/favorite');
+    yield put({
+      type: 'SET_FAVORITES',
+      payload: response.data
+    });
+  } 
+  catch (err){
+    console.log('fetch error', err);
+  }
+}
+
+const favoriteReducer = (state = [], action) => {
+  if(action.type === 'SET_FAVORITES') {
+    return action.payload
+  }
+  return state;
 }
 
 // Redux store
 const storeInstance = createStore(
-  combineReducers({  }),
+  combineReducers({ 
+    favoriteReducer,
+  }),
   applyMiddleware(sagaMiddleware, logger),
 );
 
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}>
-  <App />
+ReactDOM.render(
+  <Provider store={storeInstance}>
+    <App />
   </Provider>,
   document.getElementById('root'));
 
