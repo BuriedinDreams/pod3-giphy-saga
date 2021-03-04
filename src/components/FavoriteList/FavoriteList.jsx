@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import FavoriteItem from '../FavoriteItem/FavoriteItem';
+import './FavoriteList.css';
 
 function FavoriteList() {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function FavoriteList() {
 
   return (
     <div>
-      <div> 
+      <div id="favorite-gif-container"> 
         {favoriteList.map((favoriteGif) => {
           return (
             <FavoriteItem key={favoriteGif.id} favoriteGif={favoriteGif}/>
