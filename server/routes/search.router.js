@@ -10,7 +10,7 @@ router.get('/:query', (req, res) => {
     params: { 
     api_key: process.env.GIPHY_API_KEY,
     q: req.params.query,
-    limit: 9,
+    limit: 15,
     }
   })
   .then((apiRes) => {

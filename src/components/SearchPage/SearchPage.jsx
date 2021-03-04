@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import './SearchPage.css'
 
 import SearchBar from '../SearchBar/SearchBar'
 import SearchResults from '../SearchResults/SearchResults'
@@ -10,8 +11,9 @@ function SearchPage() {
 
   const [ newSearch, setNewSearch ] = useState('');
 
-  function handleSubmit() {
+  function handleSubmit(event) {
     //console.log('Im clicked', newSearch);
+    event.preventDefault();
     
     dispatch({
       type: 'SEND_SEARCH',
@@ -23,12 +25,17 @@ function SearchPage() {
   return (
   <div>
     <h3>Search</h3>
-    <input 
-      type="text"
-      value={newSearch}
-      onChange={(evt) => setNewSearch(evt.target.value)}
-    ></input>
-    <button onClick={handleSubmit} >Search</button>
+
+    <form onSubmit={handleSubmit} >
+      <input 
+        type="text"
+        value={newSearch}
+        onChange={(evt) => setNewSearch(evt.target.value)}
+      ></input>
+
+      <button >Search</button>
+    </form> 
+
     <SearchResults/>
   </div>
   );
