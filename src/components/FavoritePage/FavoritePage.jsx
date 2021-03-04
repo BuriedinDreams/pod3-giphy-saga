@@ -1,4 +1,4 @@
-ç
+import React from 'react';
 import FavoriteList from '../FavoriteList/FavoriteList';
 
 

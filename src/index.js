@@ -14,7 +14,7 @@ function* rootSaga() {
   // Dispatch/put listeners
   yield takeEvery('FETCH_FAVORITES', fetchFavorites)
   // this will be for the PUT
-  yield takeEvery('', )
+  // yield takeEvery('', )
 }
 
 function* fetchFavorites() {
