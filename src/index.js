@@ -50,12 +50,11 @@ function* fetchFavorites() {
 /* ---- REDUCERS ---- */
 
 const searchReducer = (state = [], action) => {
-  switch (action.type) {
-    case 'SET_SEARCH':
-      return action.payload; 
-    default:
-      return state;
+  if(action.type === 'SET_SEARCH') {
+    return action.payload // this is returning the lists of GIF's
   }
+
+  return state;
 }; // end searchReducer
 
 const favoriteReducer = (state = [], action) => {

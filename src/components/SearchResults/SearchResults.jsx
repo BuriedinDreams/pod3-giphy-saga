@@ -1,5 +1,19 @@
+import { useDispatch, useSelector } from 'react-redux';
+
 function SearchResults () {
-  return <div>Search Results</div>
+  const searchResults = useSelector((store) => store.searchReducer);
+
+  return (
+  <div>
+    {searchResults.map((result, i) => {
+      return(
+        <div key={i}>
+          <img src={result.images.fixed_height.url}/>
+          <button>favorite</button>
+        </div>)
+    })}
+  </div>
+  );
 }
 
 export default SearchResults

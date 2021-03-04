@@ -23,12 +23,15 @@ function SearchPage() {
   return (
   <div>
     <h3>Search</h3>
+
     <input 
       type="text"
       value={newSearch}
       onChange={(evt) => setNewSearch(evt.target.value)}
     ></input>
+
     <button onClick={handleSubmit} >Search</button>
+
     <SearchResults/>
   </div>
   );
