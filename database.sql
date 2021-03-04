@@ -22,5 +22,7 @@ CREATE TABLE "favorites" (
 
 -- DEFAULT DATA
 INSERT INTO "favorites" ("url")
-VALUES ('http://gph.is/Hl3JU5'), ('http://gph.is/Hl3JU5'), ('http://gph.is/Hl3JU5')
+VALUES ('https://media0.giphy.com/media/9wLKh6ms5t9qE/giphy.gif'), 
+('https://media0.giphy.com/media/9wLKh6ms5t9qE/giphy.gif'), 
+('https://media0.giphy.com/media/9wLKh6ms5t9qE/giphy.gif');
 

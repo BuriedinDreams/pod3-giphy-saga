@@ -22,6 +22,7 @@ function SearchPage() {
 
   return (
   <div>
+    <h3>Search</h3>
     <input 
       type="text"
       value={newSearch}

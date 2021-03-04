@@ -15,6 +15,8 @@ const sagaMiddleware = createSagaMiddleware();
 function* rootSaga() {
   // Dispatch/put listeners
   yield takeEvery('SEND_SEARCH', sendSearch);
+  yield takeEvery('FETCH_FAVORITES', fetchFavorites);
+
 } // end rootSaga
 
 function* sendSearch (action) {
@@ -32,6 +34,19 @@ function* sendSearch (action) {
   }
 } // end sendSearch
 
+function* fetchFavorites() {
+  try{
+    let response = yield axios.get('/api/favorite');
+    yield put({
+      type: 'SET_FAVORITES',
+      payload: response.data
+    });
+  } 
+  catch (err){
+    console.log('fetch error', err);
+  }
+} // end fetchFavorites
+
 /* ---- REDUCERS ---- */
 
 const searchReducer = (state = [], action) => {
@@ -41,13 +56,20 @@ const searchReducer = (state = [], action) => {
     default:
       return state;
   }
-}
+}; // end searchReducer
+
+const favoriteReducer = (state = [], action) => {
+  if(action.type === 'SET_FAVORITES') {
+    return action.payload
+  }
+  return state;
+}; // end favoriteReducer
 
 // Redux store
 const storeInstance = createStore(
   combineReducers({ 
-    searchReducer 
-    
+    searchReducer, 
+    favoriteReducer,
   }),
   applyMiddleware(sagaMiddleware, logger),
 );
@@ -57,7 +79,6 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={storeInstance}>
-    <App /> 
+    <App />
   </Provider>,
   document.getElementById('root'));
-
