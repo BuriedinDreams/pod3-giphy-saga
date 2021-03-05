@@ -6,13 +6,17 @@ import './FavoriteList.css';
 function FavoriteList() {
   const dispatch = useDispatch();
 
+  // Grab the list of favorites from the redux store
   const favoriteList = useSelector( store => store.favoriteReducer);
   console.log('favoriteList', favoriteList);
 
+  // on load, get(fetch)
+  // set the favorites on the page
   useEffect(() => {
     getFavorites();
   }, []);
 
+  // called on load to set favorites on page
   const getFavorites = () => {
     // Send bat-signal to redux saga
     dispatch({
@@ -23,6 +27,7 @@ function FavoriteList() {
   return (
     <div>
       <div id="favorite-gif-container"> 
+        {/* Loop through the favorites List from the store */}
         {favoriteList.map((favoriteGif) => {
           return (
             <FavoriteItem key={favoriteGif.id} favoriteGif={favoriteGif}/>

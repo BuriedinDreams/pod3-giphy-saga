@@ -16,6 +16,8 @@ const sagaMiddleware = createSagaMiddleware(); // Sagas are used to store inform
   // Dispatch/put listeners
   yield takeEvery('SEND_SEARCH', sendSearch);
   yield takeEvery('FETCH_FAVORITES', fetchFavorites);
+  yield takeEvery('CHANGE_CATEGORY', changeCategory);
+  yield takeEvery('DELETE_FAVORITE', deleteFavorite)
   yield takeEvery('ADD_FAVORITE', addFavorite);
 } // end rootSaga
 
@@ -62,6 +64,28 @@ function* fetchFavorites() {
     console.log('fetch error', err);
   }
 } // end fetchFavorites
+
+function* changeCategory(action) {
+  console.log('Gif ID', action.payload.favoriteGifId); 
+  try {
+    yield axios.put(`/api/favorite/${action.payload.favoriteGifId}`, action.payload);
+  }
+  catch (err) {
+    console.log('Saga PUT error', err);
+  }
+} // end changeCategory
+
+function* deleteFavorite(action) {
+  try {
+    yield axios.delete(`api/favorite/${action.payload}`);
+    yield put({
+      type: 'FETCH_FAVORITES',
+    });
+}
+  catch (err) {
+    console.log('Error in sagaDelete', err);
+  }
+}
 
 /* ---- REDUCERS ---- */
 
