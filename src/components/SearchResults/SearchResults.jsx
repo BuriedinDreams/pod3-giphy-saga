@@ -25,12 +25,11 @@ function SearchResults() {
         return (
           <div key={i} className="gifblock">
             <img src={result.images.fixed_height.url} />
-            <br />
             <button
               onClick={() => favoriteGif(result.images.fixed_height.url)}
               className="likebtn"
             >
-              <Favorite />
+              <Favorite fontSize="large" />
             </button>
             {/*  this button is capturing the url of the GIF --
            and saving it so it may be sent to the server.  */}

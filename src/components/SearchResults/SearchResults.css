@@ -1,16 +1,29 @@
 .gifblock {
   position: relative;
   margin: 5px;
-  max-width: 350px;
-  height: auto;
 }
 
 .likebtn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  right: 5px;
   z-index: 1;
-  color: red;
+  color: #dd6d7f;
+  border: none;
+  border-radius: 0.5em;
+  background-color: transparent;
+}
+
+.likebtn:hover {
+  color: #df4861;
+}
+
+.likebtn:active {
+  color: #db0d2f;
+}
+.likebtn:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 #gifcontainer {

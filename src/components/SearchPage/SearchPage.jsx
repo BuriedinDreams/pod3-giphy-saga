@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './SearchPage.css';
 
-import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 
-import { Container, TextField, Button } from '@material-ui/core/';
+import { TextField, Button } from '@material-ui/core/';
 
 function SearchPage() {
   const dispatch = useDispatch();
@@ -23,7 +22,7 @@ function SearchPage() {
   } // end handleSubmit
 
   return (
-    <Container maxWidth="md">
+    <div>
       <h3>Search</h3>
 
       <form onSubmit={handleSubmit}>
@@ -41,17 +40,15 @@ function SearchPage() {
         <Button
           type="submit"
           className="searchBtn"
-          size="large"
           variant="outlined"
-          // color="default"
+          color="secondary"
         >
-          Search GIF'S
+          Search GIFS
         </Button>
-        {/* <button>Search</button> */}
       </form>
 
       <SearchResults />
-    </Container>
+    </div>
   );
 }
 
