@@ -17,7 +17,10 @@ function FavoriteItem({favoriteGif}) {
   // Dispatch the new category to eventually PUT to DB
   const categoryChange = (category) => {
     console.log('New category', category);
-
+    dispatch({
+      type: 'CHANGE_CATEGORY',
+      payload: {category: category, favoriteGifId: favoriteGif.id}
+    })
   }
   
   return ( 
