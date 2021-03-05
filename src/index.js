@@ -16,10 +16,11 @@ function* rootSaga() {
   // Dispatch/put listeners
   yield takeEvery('SEND_SEARCH', sendSearch);
   yield takeEvery('FETCH_FAVORITES', fetchFavorites);
+  yield takeEvery('CHANGE_CATEGORY', changeCategory);
   yield takeEvery('ADD_FAVORITE', addFavorite);
 } // end rootSaga
 
-function* sendSearch (action) {
+function* sendSearch(action) {
   // send search request to /api/search/{query}
   let response = yield axios.get(`/api/search/${action.payload}`); // payload = phrase/word that the user searched
   //console.log(response);
@@ -63,6 +64,21 @@ function* fetchFavorites() {
     console.log('fetch error', err);
   }
 } // end fetchFavorites
+
+function* changeCategory(action) {
+  console.log('Gif ID', action.payload.favoriteGifId); 
+  try {
+    yield axios.put(`/api/favorite/${action.payload.favoriteGifId}`, action.payload);
+  }
+  catch (err) {
+    console.log('Saga PUT error', err);
+  }
+} // end changeCategory
+
+// function* deleteFavorite(action) {
+//   try {
+//     yield axios.delete(`api/plant/${action.payload}`);
+// }
 
 /* ---- REDUCERS ---- */
 
