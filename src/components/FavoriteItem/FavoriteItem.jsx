@@ -23,6 +23,25 @@ function FavoriteItem({favoriteGif}) {
     })
   }
   
+  const handleDelete = () => {
+    dispatch({
+      type: 'DELETE_FAVORITE',
+      payload: favoriteGif.id,
+    })
+  }
+
+//   const removeItem = () => {
+//     axios({
+//         method: 'DELETE',
+//         url: /fruit/${props.basketItem.id}
+//     }).then((response) => {
+//         getFruit();
+//     }).catch((error) => {
+//         console.log(error);
+//         alert('Unable to delete item');
+//     });  
+// }
+
   return ( 
   <div className="favorite-gifs">
     <img src={favoriteGif.url} />
@@ -35,7 +54,7 @@ function FavoriteItem({favoriteGif}) {
       <option value="nsfw">NSFW</option>
       <option value="meme">Meme</option>
     </select>
-    {/* <button onClick={handleClick}>Confirm</button> */}
+    <button onClick={handleDelete}>Delete</button>
   </div>
   )
 }
