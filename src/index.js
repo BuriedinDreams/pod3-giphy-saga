@@ -17,6 +17,7 @@ function* rootSaga() {
   yield takeEvery('SEND_SEARCH', sendSearch);
   yield takeEvery('FETCH_FAVORITES', fetchFavorites);
   yield takeEvery('CHANGE_CATEGORY', changeCategory);
+  yield takeEvery('DELETE_FAVORITE', deleteFavorite)
 } // end rootSaga
 
 function* sendSearch(action) {
@@ -57,10 +58,17 @@ function* changeCategory(action) {
   }
 } // end changeCategory
 
-// function* deleteFavorite(action) {
-//   try {
-//     yield axios.delete(`api/plant/${action.payload}`);
-// }
+function* deleteFavorite(action) {
+  try {
+    yield axios.delete(`api/plant/${action.payload}`);
+    yield put({
+      type: 'FETCH_FAVORITES',
+    });
+}
+  catch (err) {
+    console.log('Error in sagaDelete', err);
+  }
+}
 
 /* ---- REDUCERS ---- */
 
