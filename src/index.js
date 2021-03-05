@@ -60,7 +60,7 @@ function* changeCategory(action) {
 
 function* deleteFavorite(action) {
   try {
-    yield axios.delete(`api/plant/${action.payload}`);
+    yield axios.delete(`api/favorite/${action.payload}`);
     yield put({
       type: 'FETCH_FAVORITES',
     });
