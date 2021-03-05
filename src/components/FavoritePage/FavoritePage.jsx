@@ -1,14 +1,15 @@
 import React from 'react';
 import FavoriteList from '../FavoriteList/FavoriteList';
 
+import { Container } from '@material-ui/core/';
 
 function FavoritePage() {
   return (
-    <div>
-      <h2>Favorite Page</h2>
+    <Container maxWidth="md">
+      <h3>Favorite Page</h3>
       <FavoriteList />
-    </div>
-  )
+    </Container>
+  );
 }
 
 export default FavoritePage;
