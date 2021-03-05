@@ -7,12 +7,12 @@ import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
+// needed to source the css file
+import './index.css';
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware(); // Sagas are used to store information to be sent to the server.
 
-/* ---- SAGAS ---- */  // Sagas are used to store information to be sent to the server.
-
-function* rootSaga() {
+/* ---- SAGAS ---- */ function* rootSaga() {
   // Dispatch/put listeners
   yield takeEvery('SEND_SEARCH', sendSearch);
   yield takeEvery('FETCH_FAVORITES', fetchFavorites);
@@ -29,39 +29,38 @@ function* sendSearch(action) {
   try {
     yield put({
       type: 'SET_SEARCH',
-      payload: response.data // this response is used so the useSelector is able to retrieve the information
-    })
+      payload: response.data, // this response is used so the useSelector is able to retrieve the information
+    });
   } catch (err) {
     console.log('Error in search', err);
   }
 } // end sendSearch
 
-function* addFavorite(action) { 
-  console.log('in addFavorite', action.payload)
-  
+function* addFavorite(action) {
+  console.log('in addFavorite', action.payload);
+
   // post favorite to database
   try {
-    yield axios.post(`/api/favorite/`, action.payload ); // this is the url from the user clicking the fav button.
+    yield axios.post(`/api/favorite/`, action.payload); // this is the url from the user clicking the fav button.
 
-     // update favoriteReducer
-    yield put({ // put is dispatching the information to be grabbed by whoever.
-      type: 'FETCH_FAVORITES'  // this is being caught by RootSaga which is then being sent to function fetchFavorites()
+    // update favoriteReducer
+    yield put({
+      // put is dispatching the information to be grabbed by whoever.
+      type: 'FETCH_FAVORITES', // this is being caught by RootSaga which is then being sent to function fetchFavorites()
     });
-  } catch(err) {
+  } catch (err) {
     console.log('Error in Fav post', err);
   }
-
-}; // end addFavorite
+} // end addFavorite
 
 function* fetchFavorites() {
-  try{
+  try {
     let response = yield axios.get('/api/favorite');
     yield put({
-      type: 'SET_FAVORITES', 
-      payload: response.data
+      type: 'SET_FAVORITES',
+      payload: response.data,
     });
-  } 
-  catch (err){
+  } catch (err) {
     console.log('fetch error', err);
   }
 } // end fetchFavorites
@@ -91,29 +90,28 @@ function* deleteFavorite(action) {
 /* ---- REDUCERS ---- */
 
 const searchReducer = (state = [], action) => {
-  if(action.type === 'SET_SEARCH') {
-    return action.payload // this is returning the lists of GIF's
+  if (action.type === 'SET_SEARCH') {
+    return action.payload; // this is returning the lists of GIF's
   }
 
   return state;
 }; // end searchReducer
 
 const favoriteReducer = (state = [], action) => {
-  if(action.type === 'SET_FAVORITES') {
-    return action.payload
+  if (action.type === 'SET_FAVORITES') {
+    return action.payload;
   }
   return state;
 }; // end favoriteReducer
 
 // Redux store
 const storeInstance = createStore(
-  combineReducers({ 
-    searchReducer, 
+  combineReducers({
+    searchReducer,
     favoriteReducer,
   }),
-  applyMiddleware(sagaMiddleware, logger),
+  applyMiddleware(sagaMiddleware, logger)
 );
-
 
 sagaMiddleware.run(rootSaga);
 
@@ -121,4 +119,5 @@ ReactDOM.render(
   <Provider store={storeInstance}>
     <App />
   </Provider>,
-  document.getElementById('root'));
+  document.getElementById('root')
+);

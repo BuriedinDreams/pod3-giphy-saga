@@ -1,3 +1,11 @@
 form {
-  margin: 10px 50px;
+  text-align: center;
+}
+
+.searchInput {
+  background-color: #f5f5f5;
+}
+
+Button {
+  height: 47px;
 }

@@ -1,0 +1,24 @@
+h1 {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  font-size: 3em;
+  letter-spacing: 0.2em;
+  color: #affc41;
+  margin: 10px auto;
+}
+
+Nav {
+  text-align: center;
+}
+.navigation {
+  text-decoration: none;
+  margin: 10px;
+  color: #1dd3b0;
+}
+
+#banner {
+  background-color: #161616;
+  margin: 0px;
+  padding: 30px;
+}

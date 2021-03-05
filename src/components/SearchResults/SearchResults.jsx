@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './SearchResults.css';
 
-function SearchResults () {
+import { Favorite } from '@material-ui/icons';
+
+function SearchResults() {
   const dispatch = useDispatch();
 
   const searchResults = useSelector((store) => store.searchReducer);
@@ -12,35 +14,32 @@ function SearchResults () {
     // dispatch to index
     dispatch({
       type: 'ADD_FAVORITE',
-      payload: { url }  // this is taking what the user clicked as their favorite GIF 
-                   // and sends it to index.js/ reducer.
-    })
-  } // end favoriteGif
+      payload: { url }, // this is taking what the user clicked as their favorite GIF
+      // and sends it to index.js/ reducer.
+    });
+  }; // end favoriteGif
 
   return (
-  <div id="gifcontainer">
-    {searchResults.map((result, i) => {
-      return(
-        <div key={i} className="gifblock">
-          <img src={result.images.fixed_height.url}/> 
-          <br/> 
-          <button 
-            onClick={() => favoriteGif(result.images.fixed_height.url)}
-            className="likebtn"
+    <div id="gifcontainer">
+      {searchResults.map((result, i) => {
+        return (
+          <div key={i} className="gifblock">
+            <img src={result.images.fixed_height.url} />
+            <button
+              onClick={() => favoriteGif(result.images.fixed_height.url)}
+              className="likebtn"
             >
-              favorite
-          </button>
-          {/*  this button is capturing the url of the GIF --
+              <Favorite fontSize="large" />
+            </button>
+            {/*  this button is capturing the url of the GIF --
            and saving it so it may be sent to the server.  */}
-        </div>)
-    })}
-  </div>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
-export default SearchResults
+export default SearchResults;
 
-
-
-
-// this is going to be our results | giphys 
+// this is going to be our results | giphys

@@ -7,5 +7,22 @@
 }
 
 .favorite-gifs {
-  margin-right: 50px;
+  /* margin-right: 50px; */
+  position: relative;
+  margin: 5px;
+}
+
+#deleteBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+  border: black;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 1em;
+}
+
+#category-label {
+  color: white;
 }

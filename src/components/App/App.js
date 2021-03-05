@@ -7,7 +7,7 @@ import FavoritePage from '../FavoritePage/FavoritePage';
 
 function App(props) {
   return (
-    <div>
+    <div id="appContainer">
       <Router>
         <Header />
 
